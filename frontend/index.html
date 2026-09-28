@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f6f3ec" />
+    <meta
+      name="description"
+      content="Morrow Shop: considered everyday objects for living well."
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <title>Morrow Shop · Everyday, considered</title>
+  </head>
+  <body>
+    <div class="announcement">
+      A little good design for every day <span aria-hidden="true">✳</span> A
+      demo shop for Kubernetes practice
+    </div>
+    <header class="site-header">
+      <div class="shell header-inner">
+        <a class="brand" href="#top" aria-label="Morrow Shop home"
+          ><span class="brand-mark">m<span>•</span></span
+          ><span>morrow<span class="brand-suffix"> / shop</span></span></a
+        >
+        <nav class="nav-links" aria-label="Main navigation">
+          <a href="#collection">Shop all</a><a href="#about">Our story</a>
+        </nav>
+        <button
+          class="cart-trigger"
+          id="open-cart"
+          type="button"
+          aria-label="Open shopping cart"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.7"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M5 8h14l1 12H4L5 8Z" />
+            <path d="M9 9V6a3 3 0 0 1 6 0v3" /></svg
+          ><span>Cart</span><span class="cart-count" id="cart-count">0</span>
+        </button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero shell" aria-labelledby="hero-title">
+        <div class="hero-content">
+          <span class="eyebrow"
+            ><span class="eyebrow-dot"></span> THE EVERYDAY EDIT</span
+          >
+          <h1 id="hero-title">Good things<br />for <em>every day.</em></h1>
+          <p>
+            Thoughtful objects that make the little moments feel a little more
+            yours.
+          </p>
+          <a class="button button-dark" href="#collection"
+            >Explore the collection <span aria-hidden="true">↗</span></a
+          >
+          <div class="hero-note">
+            <span class="tiny-star" aria-hidden="true">✳</span> Curated for
+            living well
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="hero-blob"></div>
+          <div class="hero-orbit orbit-one"></div>
+          <div class="hero-orbit orbit-two"></div>
+          <div class="hero-cup">☕</div>
+          <div class="hero-sparkle sparkle-one">✳</div>
+          <div class="hero-sparkle sparkle-two">✦</div>
+          <div class="hero-tag">
+            a little joy, delivered<br /><span>01 / 08</span>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="benefits shell"
+        id="about"
+        aria-label="About the collection"
+      >
+        <div>
+          <span class="benefit-icon">✳</span><strong>Simple by design</strong>
+          <p>Easy to love, easy to use.</p>
+        </div>
+        <div>
+          <span class="benefit-icon">◌</span><strong>Made for real life</strong>
+          <p>Everyday objects with purpose.</p>
+        </div>
+        <div>
+          <span class="benefit-icon">♡</span><strong>A little more joy</strong>
+          <p>Small details, big difference.</p>
+        </div>
+      </section>
+
+      <section
+        class="collection shell"
+        id="collection"
+        aria-labelledby="collection-title"
+      >
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">THE COLLECTION / 2026</span>
+            <h2 id="collection-title">Find your new favorite.</h2>
+            <p>Pieces worth making room for.</p>
+          </div>
+          <div class="item-count" id="item-count">Loading products...</div>
+        </div>
+        <div class="shop-tools">
+          <div
+            class="filters"
+            id="filters"
+            role="group"
+            aria-label="Filter by category"
+          ></div>
+          <label class="search"
+            ><svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              aria-hidden="true"
+            >
+              <circle cx="10.8" cy="10.8" r="6.6" />
+              <path d="m16 16 5 5" /></svg
+            ><input
+              id="search"
+              type="search"
+              placeholder="Search products"
+              autocomplete="off"
+              aria-label="Search products"
+          /></label>
+        </div>
+        <div class="products" id="products" aria-live="polite">
+          <div class="loading">Loading the collection...</div>
+        </div>
+      </section>
+      <section class="closing shell">
+        <span class="closing-sun" aria-hidden="true">✳</span>
+        <p>Little things make a place feel like yours.</p>
+        <a href="#collection"
+          >Back to the collection <span aria-hidden="true">↑</span></a
+        >
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="shell footer-inner">
+        <span class="brand footer-brand"
+          ><span class="brand-mark">m<span>•</span></span
+          ><span>morrow<span class="brand-suffix"> / shop</span></span></span
+        >
+        <p>A demo storefront for your three-tier deployment practice.</p>
+        <span>Made for learning, not live sales.</span>
+      </div>
+    </footer>
+
+    <div class="scrim" id="scrim" hidden></div>
+    <aside
+      class="cart-panel"
+      id="cart-panel"
+      aria-label="Shopping cart"
+      aria-hidden="true"
+      tabindex="-1"
+    >
+      <div class="cart-top">
+        <div>
+          <span class="eyebrow">YOUR SELECTION</span>
+          <h2>Shopping bag <span id="drawer-count">(0)</span></h2>
+        </div>
+        <button
+          class="icon-button"
+          id="close-cart"
+          type="button"
+          aria-label="Close cart"
+        >
+          ×
+        </button>
+      </div>
+      <div class="cart-items" id="cart-items"></div>
+      <div class="cart-bottom">
+        <div class="subtotal">
+          <span>Subtotal</span><strong id="cart-subtotal">₹0</strong>
+        </div>
+        <p>Demo checkout. No payment is collected.</p>
+        <button
+          class="button button-dark checkout-button"
+          id="open-checkout"
+          type="button"
+        >
+          Continue to checkout <span aria-hidden="true">↗</span>
+        </button>
+      </div>
+    </aside>
+
+    <dialog
+      id="checkout-dialog"
+      class="checkout-dialog"
+      aria-labelledby="checkout-title"
+    >
+      <form id="checkout-form">
+        <div class="dialog-top">
+          <div>
+            <span class="eyebrow">ALMOST THERE</span>
+            <h2 id="checkout-title">Checkout</h2>
+          </div>
+          <button
+            type="button"
+            class="icon-button"
+            id="close-checkout"
+            aria-label="Close checkout"
+          >
+            ×
+          </button>
+        </div>
+        <p>
+          Enter your details to place a demo order. No payment information is
+          needed.
+        </p>
+        <label
+          >Full name<input
+            name="name"
+            type="text"
+            required
+            minlength="2"
+            maxlength="80"
+            autocomplete="name"
+            placeholder="Your name" /></label
+        ><label
+          >Email address<input
+            name="email"
+            type="email"
+            required
+            maxlength="254"
+            autocomplete="email"
+            placeholder="you@example.com" /></label
+        ><label
+          >Delivery address<textarea
+            name="address"
+            required
+            minlength="10"
+            maxlength="500"
+            rows="3"
+            autocomplete="street-address"
+            placeholder="Street, city, postal code"
+          ></textarea>
+        </label>
+        <div class="checkout-total">
+          <span>Order total</span><strong id="checkout-total">₹0</strong>
+        </div>
+        <p class="form-error" id="form-error" role="alert" hidden></p>
+        <button
+          type="submit"
+          class="button button-dark submit-order"
+          id="submit-order"
+        >
+          Place demo order <span aria-hidden="true">↗</span>
+        </button>
+      </form>
+    </dialog>
+    <dialog
+      id="success-dialog"
+      class="success-dialog"
+      aria-labelledby="success-title"
+    >
+      <div class="success-icon">✓</div>
+      <span class="eyebrow">ALL SET</span>
+      <h2 id="success-title">Thanks for your order!</h2>
+      <p id="success-message"></p>
+      <button type="button" class="button button-dark" id="close-success">
+        Keep shopping <span aria-hidden="true">↗</span>
+      </button>
+    </dialog>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
