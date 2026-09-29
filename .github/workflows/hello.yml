@@ -1,0 +1,11 @@
+name: hello
+on:
+  push:
+    branch: main
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: hello from GitHub Actions
+        run: echo "HELLO FROM GITHUB ACTIONS"
