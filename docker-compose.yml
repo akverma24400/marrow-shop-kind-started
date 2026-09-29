@@ -3,6 +3,7 @@ services:
     build:
       context: ./database
       dockerfile: Dockerfile
+    container_name: database
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
@@ -22,6 +23,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     restart: always
+    container_name: backend
     environment:
       PORT: 5000
       DB_HOST: database
@@ -40,6 +42,7 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
     restart: always
+    container_name: frontend
     environment:
       API_PROXY_TARGET: http://backend:5000
     ports:
