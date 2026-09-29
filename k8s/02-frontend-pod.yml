@@ -1,0 +1,12 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: marrow-fe
+  namespace: marrow-ns
+
+spec:
+  containers:
+    - name: marrow-frontend
+      image: akash24400/marrow-shop-kind-started-frontend
+      ports:
+        - containerPort: 5173
