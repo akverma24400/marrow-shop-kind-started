@@ -7,6 +7,6 @@ metadata:
 spec:
   containers:
     - name: marrow-frontend
-      image: akash24400/marrow-shop-kind-started-frontend
+      image: akash24400/marrow-shop-kind-started-frontend:latest
       ports:
         - containerPort: 5173
