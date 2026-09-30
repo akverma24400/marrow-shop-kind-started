@@ -1,0 +1,68 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-deployment
+  labels:
+    app: marrow-be
+  namespace: marrow-ns
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: marrow-be
+  template:
+    metadata:
+      labels:
+        app: marrow-be
+    spec:
+      containers:
+      - name: marrow-backend
+        image: akash24400/marrow-shop-kind-started-backend:latest
+        ports:
+        - containerPort: 5000
+
+        env:
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: marrow-configmap
+                key: PORT
+
+          - name: DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: marrow-configmap
+                key: DB_HOST
+          
+          - name: DB_PORT
+            valueFrom: 
+              configMapKeyRef:
+                name: marrow-configmap
+                key: DB_PORT
+
+          - name: DB_USER
+            valueFrom:
+              configMapKeyRef:
+                name: marrow-configmap
+                key: DB_USER
+
+          - name: DB_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: marrow-configmap
+                key: DB_NAME
+
+          - name: DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: marrow-secrets
+                key: POSTGRES_PASSWORD
+
+        resources:
+          requests:
+            cpu: 10m
+            memory: 64Mi
+
+          limits:
+            cpu: 250m
+            memory: 128Mi
