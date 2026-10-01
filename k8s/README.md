@@ -6,7 +6,15 @@ This guide covers the Kubernetes setup. For the application overview, local deve
 
 ## Application Demo
 
-**Demo video: coming soon.**
+
+
+https://github.com/user-attachments/assets/52a82eab-6d89-4a89-97da-bc363d497579
+
+
+
+
+
+
 
 The walkthrough will show the storefront loading products, searching or filtering the catalog, adding items to the cart, and placing a demo order stored in PostgreSQL. Checkout does not collect payments.
 
