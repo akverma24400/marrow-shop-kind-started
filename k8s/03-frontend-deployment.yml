@@ -20,6 +20,11 @@ spec:
         image: akash24400/marrow-shop-kind-started-frontend:latest
         ports:
         - containerPort: 5173
+
+        env:
+          - name: API_PROXY_TARGET
+            value: "http://backend-service:5000"
+
         resources:
           requests:
             cpu: 10m

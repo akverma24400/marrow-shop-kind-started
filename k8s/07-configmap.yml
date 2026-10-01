@@ -7,8 +7,9 @@ data:
   POSTGRES_USER: postgres
   POSTGRES_DB: marrow_shop
 
-  DB_HOST: database
+  DB_HOST: postgres
   PORT: "5000"
   DB_PORT: "5432"
   DB_USER: postgres
-  DB_NAME: morrow_shop    
+  DB_NAME: marrow_shop
+
