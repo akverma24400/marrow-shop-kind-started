@@ -36,6 +36,7 @@ jobs:
           node --check src/server.js
 
   frontend:
+    needs: backend
     name: Frontend checks
     runs-on: ubuntu-latest
 
