@@ -1,0 +1,61 @@
+name: Code Quality
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  backend:
+    name: Backend checks
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check JavaScript syntax
+        run: |
+          node --check src/app.js
+          node --check src/db.js
+          node --check src/server.js
+
+  frontend:
+    name: Frontend checks
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: frontend
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build frontend
+        run: npm run build

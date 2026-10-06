@@ -6,7 +6,12 @@ permissions:
   contents: write
 
 jobs:
+
+  code-quality:
+    uses: ./.github/workflows/code-quality.yml
+
   build-and-push:
+    needs: code-quality
     uses: ./.github/workflows/build-and-push.yml
     secrets: inherit
 
