@@ -37,7 +37,7 @@ jobs:
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          passowrd: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and Push Backend Image
         uses: docker/build-push-action@v7
