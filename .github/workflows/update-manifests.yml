@@ -1,0 +1,61 @@
+name: Update Kubernetes Manifests
+
+on:
+  workflow_call:
+    inputs:
+      image_tag:
+        description: Git commit SHA used to tag the images
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    env:
+      IMAGE_TAG: ${{ inputs.image_tag }}
+      FRONTEND_IMAGE: akash24400/marrow-shop-kind-started-frontend
+      BACKEND_IMAGE: akash24400/marrow-shop-kind-started-backend
+
+    steps:
+      - name: Checkout scanned commit
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.image_tag }}
+
+      - name: Update image tags
+        run: |
+          set -euo pipefail
+
+          sed -i \
+            "s#${FRONTEND_IMAGE}:.*#${FRONTEND_IMAGE}:${IMAGE_TAG}#" \
+            k8s/03-frontend-deployment.yml
+
+          sed -i \
+            "s#${BACKEND_IMAGE}:.*#${BACKEND_IMAGE}:${IMAGE_TAG}#" \
+            k8s/05-backend-deployment.yml
+
+          git diff -- k8s/03-frontend-deployment.yml \
+            k8s/05-backend-deployment.yml
+
+      - name: Commit and push manifests
+        run: |
+          set -euo pipefail
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add k8s/03-frontend-deployment.yml \
+            k8s/05-backend-deployment.yml
+
+          if git diff --cached --quiet; then
+            echo "Image tags are already up to date."
+            exit 0
+          fi
+
+          git commit -m "chore: update image tags to ${IMAGE_TAG} [skip ci]"
+          git push origin HEAD:main
