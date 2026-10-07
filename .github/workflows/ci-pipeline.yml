@@ -31,6 +31,13 @@ jobs:
     uses: ./.github/workflows/build-and-push.yml
     secrets: inherit
 
+  image-scan:
+    needs: build-and-push
+    uses: ./.github/workflows/image-scan.yml
+    with:
+      image_tag: ${{ needs.build-and-push.outputs.image_tag }}
+    secrets: inherit
+
   # update-manifests:
   #   needs: build-and-push
   #   uses: ./.github/workflows/update-manifests.yml
