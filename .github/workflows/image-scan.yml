@@ -48,3 +48,4 @@ jobs:
           ignore-unfixed: false
           exit-code: "1"
           timeout: 10m
+          trivyignores: .trivyignore
