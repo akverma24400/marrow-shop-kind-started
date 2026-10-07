@@ -10,8 +10,12 @@ jobs:
   code-quality:
     uses: ./.github/workflows/code-quality.yml
 
-  build-and-push:
+  docker-lint:
     needs: code-quality
+    uses: ./.github/workflows/docker-lint.yml
+
+  build-and-push:
+    needs: [code-quality, docker-lint]
     uses: ./.github/workflows/build-and-push.yml
     secrets: inherit
 
