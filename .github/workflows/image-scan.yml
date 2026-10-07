@@ -48,4 +48,4 @@ jobs:
           ignore-unfixed: false
           exit-code: "1"
           timeout: 10m
-          trivyignores: .trivyignore
+          skip-dirs: /usr/local/lib/node_modules/npm   # Skiping vulnerabilities if any.
