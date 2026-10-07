@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: marrow-frontend
-        image: akash24400/marrow-shop-kind-started-frontend:latest
+        image: akash24400/marrow-shop-kind-started-frontend:d566a01171cd8c295d058db8014fc90265ae3ba7
         ports:
         - containerPort: 5173
 
