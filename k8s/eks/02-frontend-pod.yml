@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: marrow-fe
+  namespace: marrow-ns
+
+spec:
+  containers:
+    - name: marrow-frontend
+      image: akash24400/marrow-shop-kind-started-frontend:latest
+      ports:
+        - containerPort: 5173
+      resources:
+        requests:
+          cpu: 100m
+          memory: 128Mi
+        limits:
+          cpu: 500m
+          memory: 512Mi

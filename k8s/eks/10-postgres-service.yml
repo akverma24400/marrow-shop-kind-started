@@ -1,0 +1,15 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: postgres
+  namespace: marrow-ns
+
+spec:
+  clusterIP: None
+  selector:
+    app: marrow-postgres
+
+  ports:
+    - protocol: TCP
+      port: 5432
+      targetPort: 5432

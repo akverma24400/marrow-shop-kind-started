@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deployment
+  labels:
+    app: marrow-fe
+  namespace: marrow-ns
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: marrow-fe
+  template:
+    metadata:
+      labels:
+        app: marrow-fe
+    spec:
+      containers:
+      - name: marrow-frontend
+        image: akash24400/marrow-shop-kind-started-frontend:d566a01171cd8c295d058db8014fc90265ae3ba7
+        ports:
+        - containerPort: 5173
+
+        env:
+          - name: API_PROXY_TARGET
+            value: "http://backend-service:5000"
+
+        resources:
+          requests:
+            cpu: 10m
+            memory: 64Mi
+
+          limits:
+            cpu: 250m
+            memory: 128Mi

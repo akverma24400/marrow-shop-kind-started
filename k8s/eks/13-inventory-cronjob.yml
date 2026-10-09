@@ -1,0 +1,55 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: inventory-report
+  namespace: marrow-ns
+spec:
+  schedule: "*/5 * * * *"
+  timeZone: "Asia/Kolkata"
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 2
+  failedJobsHistoryLimit: 1
+
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      activeDeadlineSeconds: 120
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: inventory-report
+              image: postgres:17-alpine
+
+              envFrom:
+                - configMapRef:
+                    name: marrow-configmap
+
+              env:
+                - name: PGPASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: marrow-secrets
+                      key: POSTGRES_PASSWORD
+
+                - name: PGCONNECT_TIMEOUT
+                  value: "5"
+
+              command: ["sh", "-ec"]
+              args:
+                - |
+                  echo "Products requiring restocking:"
+                  psql -X --no-password -v ON_ERROR_STOP=1 \
+                    -h "$DB_HOST" \
+                    -p "$DB_PORT" \
+                    -U "$DB_USER" \
+                    -d "$DB_NAME" \
+                    -c "SELECT name, stock FROM products WHERE stock <= 10 ORDER BY stock, name;"
+
+              resources:
+                requests:
+                  cpu: 20m
+                  memory: 32Mi
+                limits:
+                  cpu: 100m
+                  memory: 64Mi

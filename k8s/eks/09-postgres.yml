@@ -1,0 +1,90 @@
+kind: StatefulSet
+apiVersion: apps/v1
+metadata:
+  name: postgres
+  namespace: marrow-ns
+  labels:
+    app: marrow-postgres
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: marrow-postgres
+  serviceName: postgres
+  template:
+    metadata:
+      labels:
+        app: marrow-postgres
+
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:17-alpine
+        ports:
+        - containerPort: 5432
+          name: web
+        volumeMounts:
+        - name: pgdata
+          mountPath: /var/lib/postgresql/data
+        - name: init
+          mountPath: /docker-entrypoint-initdb.d
+
+        env:
+          - name: POSTGRES_USER
+            valueFrom:
+              configMapKeyRef:
+                name: marrow-configmap
+                key: POSTGRES_USER
+
+          - name: POSTGRES_DB
+            valueFrom:
+              configMapKeyRef:
+                name: marrow-configmap
+                # Match the backend's database name: morrow_shop.
+                key: POSTGRES_DB
+
+
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: marrow-secrets
+                key: POSTGRES_PASSWORD
+
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 500m
+            memory: 512Mi
+
+        readinessProbe:
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - pg_isready -U "$POSTGRES_USER" -d "$POSTGRES_DB"
+      volumes:
+        - name: init
+          configMap:
+            name: postgres-init
+
+  volumeClaimTemplates:
+    - metadata:
+        name: pgdata
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: "manual"
+        resources:
+          requests:
+            storage: 0.5Gi
+
+
+
+
+
+
+
+
+
