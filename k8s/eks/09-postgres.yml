@@ -51,6 +51,9 @@ spec:
                 name: marrow-secrets
                 key: POSTGRES_PASSWORD
 
+          - name: PGDATA
+            value: /var/lib/postgresql/data/pgdata
+
         resources:
           requests:
             cpu: 100m
@@ -75,7 +78,7 @@ spec:
         name: pgdata
       spec:
         accessModes: [ "ReadWriteOnce" ]
-        storageClassName: "manual"
+        storageClassName: "ebs-gp3"
         resources:
           requests:
             storage: 0.5Gi
